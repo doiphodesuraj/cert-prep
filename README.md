@@ -17,6 +17,24 @@ Open the URL Vite prints (default http://localhost:5173).
 
 For a production build: `npm run build`, then `npm run preview`. The `dist/` folder is a static site and can be hosted anywhere.
 
+## Deploy: Cloudflare Pages behind Cloudflare Access (private)
+
+The repo is private, and the site should be too, because the question bank comes from a third-party PDF. Cloudflare Pages builds the site from GitHub on every push. Cloudflare Access puts an email one-time-PIN login in front of it.
+
+1. **Pages project:** Cloudflare dashboard → *Workers & Pages* → *Create* → *Pages* → *Connect to Git* → choose `cert-prep`.
+   - Framework preset: *None* (or *Vite*)
+   - Build command: `npm run build`
+   - Build output directory: `dist`
+   - Root directory: *(leave empty)*
+   - Node version comes from `.node-version` (22).
+2. **Access login:** *Zero Trust* → *Access* → *Applications* → *Add an application* → *Self-hosted*.
+   - Add **both** `<project>.pages.dev` and `*.<project>.pages.dev` as public hostnames. The "Enable access policy" toggle in the Pages settings protects **preview** URLs only, not production.
+   - Policy: *Allow*, Include → *Emails* → the addresses allowed in.
+   - Login method: *One-time PIN*.
+3. Check it: open the site in a private window. You should land on the Cloudflare Access login page, not the app.
+
+`public/_headers` and `public/robots.txt` also tell search engines not to index the site.
+
 ## Features
 
 | Area | What it does |
