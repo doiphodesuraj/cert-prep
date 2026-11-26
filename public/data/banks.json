@@ -1,0 +1,10 @@
+[
+  {
+    "id": "clf-c02",
+    "title": "AWS Certified Cloud Practitioner",
+    "code": "CLF-C02",
+    "file": "clf-c02.json",
+    "source": "aws-certified-cloud-practitioner-clf-c02_7887.pdf",
+    "exam": { "questions": 65, "minutes": 90, "passPercent": 70 }
+  }
+]
