@@ -1,6 +1,7 @@
 import { useState, type ReactNode } from 'react'
 import { navigate, useApp } from '../state/AppState'
 import { cx } from '../lib/util'
+import { currentUser, logout } from '../lib/auth'
 import { Icon } from './ui'
 
 const NAV = [
@@ -74,6 +75,10 @@ export function Layout({ active, children }: { active: string; children: ReactNo
         <button onClick={() => go('settings')} className={cx('flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium hover:bg-slate-100 dark:hover:bg-slate-800/70', active === 'settings' ? 'text-indigo-600 dark:text-indigo-300' : 'text-slate-600 dark:text-slate-400')}>
           <Icon name="keyboard" className="size-[18px]" />
           Data &amp; shortcuts
+        </button>
+        <button onClick={logout} className="flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium text-slate-600 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800/70">
+          <Icon name="left" className="size-[18px]" />
+          <span className="flex-1 truncate text-left">Sign out <span className="text-xs text-slate-400">({currentUser()})</span></span>
         </button>
       </div>
     </nav>

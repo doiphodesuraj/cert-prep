@@ -1,5 +1,6 @@
 import { AppProvider, useApp, useRoute } from './state/AppState'
 import { Layout } from './components/Layout'
+import { LoginGate } from './components/LoginGate'
 import { Dashboard } from './pages/Dashboard'
 import { PracticeRunner, PracticeSetup } from './pages/Practice'
 import { ExamRunner, ExamSetup } from './pages/Exam'
@@ -33,8 +34,10 @@ function Router() {
 
 export default function App() {
   return (
-    <AppProvider>
-      <Router />
-    </AppProvider>
+    <LoginGate>
+      <AppProvider>
+        <Router />
+      </AppProvider>
+    </LoginGate>
   )
 }
